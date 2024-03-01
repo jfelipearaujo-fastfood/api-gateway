@@ -28,7 +28,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_gateway"></a> [gateway](./docs/gateway.md) | ./modules/gateway | n/a |
+| <a name="module_gateway"></a> [gateway](#module\_gateway) | ./modules/gateway | n/a |
 ## Resources
 
 No resources.
@@ -36,3 +36,7 @@ No resources.
 
 No outputs.
 <!-- END_TF_DOCS -->
+
+## Modules
+
+- [gateway](./docs/gateway.md)
