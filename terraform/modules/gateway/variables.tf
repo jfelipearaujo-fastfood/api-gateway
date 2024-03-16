@@ -1,34 +1,25 @@
 variable "region" {
-  type        = string
   description = "The default region to use for AWS"
+  type        = string
   default     = "us-east-1"
 }
 
 variable "cluster_name" {
   description = "The name of the EKS cluster"
+  type        = string
 }
 
 variable "vpc_id" {
-  type        = string
   description = "The ID of the VPC"
+  type        = string
 }
 
-variable "listner_arn" {
+variable "api_alb_listener_arn" {
+  description = "ARN of the API Load Balancer listener"
   type        = string
-  description = "ARN of the Load Balancer listener"
 }
 
-variable "private_subnet_1a" {
-  type        = string
-  description = "The ID of the private subnet in the first availability zone"
-}
-
-variable "private_subnet_1b" {
-  type        = string
-  description = "The ID of the private subnet in the second availability zone"
-}
-
-variable "private_subnet_1c" {
-  type        = string
-  description = "The ID of the private subnet in the third availability zone"
+variable "private_subnets" {
+  description = "The IDs of the private subnets"
+  type        = list(string)
 }

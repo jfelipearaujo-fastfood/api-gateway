@@ -2,7 +2,7 @@ variable "tags" {
   type        = map(string)
   description = "The default tags to use for AWS resources"
   default = {
-    App = "api-gateway"
+    App = "gateway"
   }
 }
 
@@ -20,6 +20,7 @@ variable "region" {
 variable "cluster_name" {
   type        = string
   description = "The name of the EKS cluster"
+  default     = "fastfood"
 }
 
 variable "vpc_id" {
@@ -27,22 +28,12 @@ variable "vpc_id" {
   description = "The ID of the VPC"
 }
 
-variable "listner_arn" {
+variable "api_alb_listener_arn" {
+  description = "ARN of the API Load Balancer listener"
   type        = string
-  description = "ARN of the Load Balancer listener"
 }
 
-variable "private_subnet_1a" {
-  type        = string
-  description = "The ID of the private subnet in the first availability zone"
-}
-
-variable "private_subnet_1b" {
-  type        = string
-  description = "The ID of the private subnet in the second availability zone"
-}
-
-variable "private_subnet_1c" {
-  type        = string
-  description = "The ID of the private subnet in the third availability zone"
+variable "private_subnets" {
+  type        = list(string)
+  description = "The IDs of the private subnets"
 }

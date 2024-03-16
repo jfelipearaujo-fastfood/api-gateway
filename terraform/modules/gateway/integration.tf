@@ -13,26 +13,22 @@ resource "aws_security_group" "vpc_link" {
 resource "aws_apigatewayv2_vpc_link" "eks" {
   name               = "eks"
   security_group_ids = [aws_security_group.vpc_link.id]
-  subnet_ids = [
-    var.private_subnet_1a,
-    var.private_subnet_1b,
-    var.private_subnet_1c,
-  ]
+  subnet_ids         = var.private_subnets
 }
 
 resource "aws_apigatewayv2_integration" "eks" {
   api_id = aws_apigatewayv2_api.api_gtw.id
 
-  integration_uri    = var.listner_arn
+  integration_uri    = var.api_alb_listener_arn
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
   connection_id      = aws_apigatewayv2_vpc_link.eks.id
 }
 
-resource "aws_apigatewayv2_route" "get_echo" {
+resource "aws_apigatewayv2_route" "all_routes" {
   api_id = aws_apigatewayv2_api.api_gtw.id
 
-  route_key = "GET /echo"
+  route_key = "ALL /{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.eks.id}"
 }
