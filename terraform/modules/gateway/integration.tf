@@ -29,6 +29,6 @@ resource "aws_apigatewayv2_integration" "eks" {
 resource "aws_apigatewayv2_route" "all_routes" {
   api_id = aws_apigatewayv2_api.api_gtw.id
 
-  route_key = "ALL /{proxy+}"
+  route_key = "ANY /{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.eks.id}"
 }
