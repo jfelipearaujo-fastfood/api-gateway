@@ -23,17 +23,8 @@ variable "cluster_name" {
   default     = "fastfood"
 }
 
-variable "vpc_id" {
+variable "load_balancer_name" {
+  description = "The name of the Load Balancer"
   type        = string
-  description = "The ID of the VPC"
-}
-
-variable "api_alb_listener_arn" {
-  description = "ARN of the API Load Balancer listener"
-  type        = string
-}
-
-variable "private_subnets" {
-  type        = list(string)
-  description = "The IDs of the private subnets"
+  default     = "lb-fastfood"
 }

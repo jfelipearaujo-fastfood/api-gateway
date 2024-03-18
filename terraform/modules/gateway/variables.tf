@@ -1,7 +1,6 @@
 variable "region" {
-  description = "The default region to use for AWS"
   type        = string
-  default     = "us-east-1"
+  description = "The default region to use for AWS"
 }
 
 variable "cluster_name" {
@@ -9,17 +8,7 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "vpc_id" {
-  description = "The ID of the VPC"
+variable "load_balancer_name" {
+  description = "The name of the Load Balancer"
   type        = string
-}
-
-variable "api_alb_listener_arn" {
-  description = "ARN of the API Load Balancer listener"
-  type        = string
-}
-
-variable "private_subnets" {
-  description = "The IDs of the private subnets"
-  type        = list(string)
 }
