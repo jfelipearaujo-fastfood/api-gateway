@@ -10,7 +10,7 @@ resource "aws_api_gateway_deployment" "main" {
 
   depends_on = [
     aws_api_gateway_integration.lambda_register,
-    aws_api_gateway_integration.lambda_auth,
+    aws_api_gateway_integration.lambda_login,
     aws_api_gateway_integration.proxy
   ]
 }
