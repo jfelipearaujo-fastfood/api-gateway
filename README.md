@@ -1,5 +1,12 @@
 # Fast-Food API Gateway
 
+This project its responsible for creating the API Gateway for the Fast-Food application with the following resources:
+
+- Lambda Function for User Authentication (login)
+- Lambda Function for User Registration (register)
+- Lambda Function for JWT Token Validation (authorizer)
+- Redirects the requests to the EKS Cluster
+
 <!-- BEGIN_TF_DOCS -->
 
 ## Requirements
