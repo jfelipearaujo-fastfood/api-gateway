@@ -54,7 +54,7 @@ resource "aws_api_gateway_integration" "proxy" {
 
   integration_http_method = "ANY"
   type                    = "HTTP_PROXY"
-  uri                     = "http://${data.aws_lb.lb.dns_name}/{proxy}"
+  uri                     = "http://${data.aws_elb.elb.dns_name}/{proxy}"
   passthrough_behavior    = "WHEN_NO_MATCH"
   content_handling        = "CONVERT_TO_TEXT"
 
@@ -64,6 +64,6 @@ resource "aws_api_gateway_integration" "proxy" {
     "integration.request.header.Authorization" = "method.request.header.Authorization"
   }
 
-  connection_type = "VPC_LINK"
-  connection_id   = aws_api_gateway_vpc_link.main.id
+  # connection_type = "VPC_LINK"
+  # connection_id   = aws_api_gateway_vpc_link.main.id
 }
