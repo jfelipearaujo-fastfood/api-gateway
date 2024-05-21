@@ -1,4 +1,4 @@
-# Fast-Food API Gateway
+# API Gateway
 
 This project its responsible for creating the API Gateway for the Fast-Food application with the following resources:
 
@@ -39,7 +39,3 @@ No resources.
 
 No outputs.
 <!-- END_TF_DOCS -->
-
-## Modules
-
-- [gateway](./docs/gateway.md)

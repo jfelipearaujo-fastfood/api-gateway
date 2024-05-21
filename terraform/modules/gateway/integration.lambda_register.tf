@@ -3,6 +3,10 @@ resource "aws_api_gateway_resource" "proxy_lambda_register" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   parent_id   = aws_api_gateway_rest_api.main.root_resource_id
   path_part   = "register"
+
+  depends_on = [
+    aws_api_gateway_rest_api.main
+  ]
 }
 
 resource "aws_api_gateway_method" "proxy_lambda_register" {
@@ -15,6 +19,11 @@ resource "aws_api_gateway_method" "proxy_lambda_register" {
     "method.request.path.proxy"           = true
     "method.request.header.Authorization" = false
   }
+
+  depends_on = [
+    aws_api_gateway_rest_api.main,
+    aws_api_gateway_resource.proxy_lambda_register
+  ]
 }
 
 resource "aws_api_gateway_method_response" "proxy_lambda_register" {
@@ -28,6 +37,12 @@ resource "aws_api_gateway_method_response" "proxy_lambda_register" {
     "method.response.header.Access-Control-Allow-Methods" = true,
     "method.response.header.Access-Control-Allow-Origin"  = true
   }
+
+  depends_on = [
+    aws_api_gateway_rest_api.main,
+    aws_api_gateway_resource.proxy_lambda_register,
+    aws_api_gateway_method.proxy_lambda_register
+  ]
 }
 
 resource "aws_api_gateway_integration_response" "proxy_lambda_register" {
@@ -43,7 +58,10 @@ resource "aws_api_gateway_integration_response" "proxy_lambda_register" {
   }
 
   depends_on = [
+    aws_api_gateway_rest_api.main,
+    aws_api_gateway_resource.proxy_lambda_register,
     aws_api_gateway_method.proxy_lambda_register,
+    aws_api_gateway_method_response.proxy_lambda_register,
     aws_api_gateway_integration.lambda_register,
   ]
 }
@@ -58,6 +76,10 @@ resource "aws_lambda_permission" "api_gtw_lambda_register_permission" {
   function_name = data.aws_lambda_function.lambda_register.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.main.execution_arn}/*/*/*"
+
+  depends_on = [
+    aws_api_gateway_rest_api.main,
+  ]
 }
 
 resource "aws_api_gateway_integration" "lambda_register" {
@@ -75,4 +97,10 @@ resource "aws_api_gateway_integration" "lambda_register" {
     "integration.request.path.proxy"    = "method.request.path.proxy"
     "integration.request.header.Accept" = "'application/json'"
   }
+
+  depends_on = [
+    aws_api_gateway_rest_api.main,
+    aws_api_gateway_resource.proxy_lambda_register,
+    aws_api_gateway_method_response.proxy_lambda_register
+  ]
 }
