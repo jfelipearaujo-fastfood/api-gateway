@@ -39,7 +39,3 @@ No resources.
 
 No outputs.
 <!-- END_TF_DOCS -->
-
-## Modules
-
-- [gateway](./docs/gateway.md)
