@@ -3,12 +3,12 @@ name: provisioning
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-
+    tags:
+      - '**'
+  
 jobs:
   deploy:
-    name: Deploy Infrastructure
+    name: Deploy
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,7 +37,7 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
-
+      
       - name: Terraform Validate
         id: validate
         run: terraform validate
