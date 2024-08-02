@@ -12,7 +12,8 @@ resource "aws_api_gateway_deployment" "main" {
     aws_api_gateway_integration.lambda_register,
     aws_api_gateway_integration.lambda_login,
     aws_api_gateway_authorizer.authorizer,
-    aws_api_gateway_integration.proxy
+    aws_api_gateway_integration.proxy,
+    aws_api_gateway_integration.options,
   ]
 }
 
